@@ -17,11 +17,18 @@
 //if we want to conform to the MKAnnotation protocol, which is the one we need to adopt in order to create map annotations, it states that we must have a coordinate in our annotation.
 
 //With map annotations, you can't use structs, and you must inherit from NSObject
+//---------------------------------------------------------------------------------------
+
+//Every time the map needs to show an annotation, it calls a viewFor method on its delegate
+
+//Customizing an annotation view is like customizing a table view cell, because iOS automatically reuses annotation views. If there isn't one available to reuse, we need to create one from scratch using the MKPinAnnotationView class
+
 
 import MapKit
 import UIKit
 
-class ViewController: UIViewController {
+//We already used Interface Builder to make our view controller the delegate for the map view, but if you want code completion to work you should also update your code to declare that the class conforms
+class ViewController: UIViewController, MKMapViewDelegate {
     @IBOutlet var mapView: MKMapView!
     
     override func viewDidLoad() {
@@ -34,6 +41,52 @@ class ViewController: UIViewController {
         let washington = Capital(title: "Washington DC", coordinate: CLLocationCoordinate2D(latitude: 38.895111, longitude: -77.036667), info: "Named after George himself.")
         
         mapView.addAnnotations([london,oslo,paris,rome,washington])
+    }
+    
+  
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        //make sure our annotation is a capital else return nil
+        //If the annotation isn't from a capital city, it must return nil so iOS uses a default view.
+        guard annotation is Capital else { return nil }
+        //set reuse identifier
+        //Define a reuse identifier. This is a string that will be used to ensure we reuse annotation views as much as possible
+        let identifier = "Capital"
+        
+        //Try to dequeue an annotation view from the map view's pool of unused views
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+        
+        
+        //If it isn't able to find a reusable view, create a new one using MKPinAnnotationView and sets its canShowCallout property to true. This triggers the popup with the city name
+        if annotationView == nil {
+            annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            //To show info in a bubble
+            annotationView?.canShowCallout = true
+            
+            //Create a new UIButton using the built-in .detailDisclosure type. This is a small blue "i" symbol with a circle around it
+            let btn = UIButton(type: .detailDisclosure)
+            annotationView?.rightCalloutAccessoryView = btn
+        } else {
+            //If it can reuse a view, update that view to use a different annotation
+            //so if we have annotation in a deque queue use it  without new annotation
+            annotationView?.annotation = annotation
+        }
+        return annotationView
+    }
+    
+    //you don't need to use addTarget() to add an action to the button, because you'll automatically be told by the map view using a calloutAccessoryControlTapped method
+    //When this method is called, you'll be told what map view sent it (we only have one, so that's easy enough), what annotation view the button came from (this is useful), as well as the button that was tapped
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        //make sure annotation is capital
+        guard let capital = view.annotation as? Capital else { return }
+        
+        let placeName = capital.title
+        let placeInfo = capital.info
+        
+        let ac = UIAlertController(title: placeName, message: placeInfo, preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK", style: .default))
+        present(ac,animated: true)
+        
     }
 
 
