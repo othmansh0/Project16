@@ -13,6 +13,7 @@
 		12D1E37326F4CE6F008315AF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12D1E37126F4CE6F008315AF /* Main.storyboard */; };
 		12D1E37526F4CE71008315AF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 12D1E37426F4CE71008315AF /* Assets.xcassets */; };
 		12D1E37826F4CE71008315AF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 12D1E37626F4CE71008315AF /* LaunchScreen.storyboard */; };
+		12D1E38726F4FB5D008315AF /* Capital.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12D1E38626F4FB5D008315AF /* Capital.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		12D1E37426F4CE71008315AF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		12D1E37726F4CE71008315AF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		12D1E37926F4CE71008315AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		12D1E38626F4FB5D008315AF /* Capital.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Capital.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				12D1E36B26F4CE6F008315AF /* AppDelegate.swift */,
 				12D1E36D26F4CE6F008315AF /* SceneDelegate.swift */,
 				12D1E36F26F4CE6F008315AF /* ViewController.swift */,
+				12D1E38626F4FB5D008315AF /* Capital.swift */,
 				12D1E37126F4CE6F008315AF /* Main.storyboard */,
 				12D1E37426F4CE71008315AF /* Assets.xcassets */,
 				12D1E37626F4CE71008315AF /* LaunchScreen.storyboard */,
@@ -139,6 +142,7 @@
 			files = (
 				12D1E37026F4CE6F008315AF /* ViewController.swift in Sources */,
 				12D1E36C26F4CE6F008315AF /* AppDelegate.swift in Sources */,
+				12D1E38726F4FB5D008315AF /* Capital.swift in Sources */,
 				12D1E36E26F4CE6F008315AF /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -289,11 +293,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3797M245X7;
 				INFOPLIST_FILE = Project16/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = othmanshahrouri.Project16;
+				PRODUCT_BUNDLE_IDENTIFIER = "othmanshahrouri.Milestone-Projects-10-12";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -308,11 +313,12 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3797M245X7;
 				INFOPLIST_FILE = Project16/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = othmanshahrouri.Project16;
+				PRODUCT_BUNDLE_IDENTIFIER = "othmanshahrouri.Milestone-Projects-10-12";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
