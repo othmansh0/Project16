@@ -38,13 +38,17 @@
 
 import MapKit
 import UIKit
+import WebKit
 
 //We already used Interface Builder to make our view controller the delegate for the map view, but if you want code completion to work you should also update your code to declare that the class conforms
-class ViewController: UIViewController, MKMapViewDelegate {
+class ViewController: UIViewController, MKMapViewDelegate,WKNavigationDelegate {
     @IBOutlet var mapView: MKMapView!
+    var webView:WKWebView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        webView = WKWebView()
+        webView.navigationDelegate = self
         //Create annotations using Capital class
         let london = Capital(title: "London", coordinate: CLLocationCoordinate2D(latitude: 51.507222, longitude: -0.1275), info: "Home to the 2012 Summer Olympics.")
         let oslo = Capital(title: "Oslo", coordinate: CLLocationCoordinate2D(latitude: 59.95, longitude: 10.75), info: "Founded over a thousand years ago.")
@@ -109,11 +113,22 @@ class ViewController: UIViewController, MKMapViewDelegate {
         guard let capital = view.annotation as? Capital else { return }
         
         let placeName = capital.title
-        let placeInfo = capital.info
+        //let placeInfo = capital.info
+        if let vc = storyboard?.instantiateViewController(identifier: "WikiView") as? WebViewController {
+            vc.urlString = "https://en.wikipedia.org/wiki/\(placeName!)"
+            navigationController?.pushViewController(vc, animated: true)
+        }
         
-        let ac = UIAlertController(title: placeName, message: placeInfo, preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "OK", style: .default))
-        present(ac,animated: true)
+        
+       
+       
+
+//        let ac = UIAlertController(title: placeName, message: placeInfo, preferredStyle: .alert)
+//        ac.addAction(UIAlertAction(title: "OK", style: .default))
+//        present(ac,animated: true)
+//
+        
+        
         
     }
 
