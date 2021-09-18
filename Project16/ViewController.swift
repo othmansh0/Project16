@@ -53,6 +53,19 @@ class ViewController: UIViewController, MKMapViewDelegate {
         let washington = Capital(title: "Washington DC", coordinate: CLLocationCoordinate2D(latitude: 38.895111, longitude: -77.036667), info: "Named after George himself.")
         
         mapView.addAnnotations([london,oslo,paris,rome,washington])
+        //Ask user which type of maps to show
+        let ac = UIAlertController(title: "Choose a map type", message: nil, preferredStyle: .actionSheet)
+        ac.addAction(UIAlertAction(title: "Satellite", style: .default, handler: { [weak self]_ in
+            self?.mapView.mapType = .satellite
+        }))
+        ac.addAction(UIAlertAction(title: "Hybrid", style: .default, handler: { [weak self] _ in
+            self?.mapView.mapType = .hybrid
+        }))
+        ac.addAction(UIAlertAction(title: "Standard", style: .default, handler: { [weak self] _ in
+            self?.mapView.mapType = .standard
+        }))
+        present(ac, animated: true)
+        
     }
     
   
