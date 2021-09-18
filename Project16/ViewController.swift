@@ -17,12 +17,24 @@
 //if we want to conform to the MKAnnotation protocol, which is the one we need to adopt in order to create map annotations, it states that we must have a coordinate in our annotation.
 
 //With map annotations, you can't use structs, and you must inherit from NSObject
+
+// Map views have annotations that weren't created by us, such as the user's location
+
 //---------------------------------------------------------------------------------------
 
 //Every time the map needs to show an annotation, it calls a viewFor method on its delegate
 
 //Customizing an annotation view is like customizing a table view cell, because iOS automatically reuses annotation views. If there isn't one available to reuse, we need to create one from scratch using the MKPinAnnotationView class
 
+//-----------------------------------------------------------------------------------------
+
+//MKPinAnnotationView is a built-in class that draws tappable pins on the map
+
+// We can choose from multiple map styles, such as satellite maps.
+
+//Maps have a mapType property that lets us control this
+
+//viewFor method that lets us control how annotation views look
 
 import MapKit
 import UIKit
@@ -54,7 +66,9 @@ class ViewController: UIViewController, MKMapViewDelegate {
         let identifier = "Capital"
         
         //Try to dequeue an annotation view from the map view's pool of unused views
-        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
+        //Try typecasting the return value from dequeueReusableAnnotationView() so that it's an MKPinAnnotationView
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKPinAnnotationView
+        
         
         
         //If it isn't able to find a reusable view, create a new one using MKPinAnnotationView and sets its canShowCallout property to true. This triggers the popup with the city name
@@ -71,6 +85,7 @@ class ViewController: UIViewController, MKMapViewDelegate {
             //so if we have annotation in a deque queue use it  without new annotation
             annotationView?.annotation = annotation
         }
+        annotationView?.pinTintColor = .green
         return annotationView
     }
     
